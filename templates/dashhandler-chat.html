@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+	
+
+
+             
+	
+                <!-- Conversations are loaded here -->
+                
+                  <!-- Message. Default to the left -->
+                  {% for message in messages %}
+                     {% if session['serverid_dash'] == message['mesfrom']%}
+                     <div class="direct-chat-msg right">
+                      <div class="direct-chat-infos clearfix">
+                        <span class="direct-chat-name float-right">{{ message['mesfrom'] }}</span>
+                        
+                      </div>
+                      <!-- /.direct-chat-infos -->
+                      
+                      <!-- /.direct-chat-img -->
+                      <div class="direct-chat-text mr-1">
+                        {{ message['message'] }}
+
+                      </div>
+                      <span class="direct-chat-timestamp float-left">{{ message['date'] }}</span>
+                      <!-- /.direct-chat-text -->
+                     </div> 
+                     {% else %}
+                       <div class="direct-chat-msg">
+                        <div class="direct-chat-infos clearfix">
+                         <span class="direct-chat-name float-left">{{ message['mesfrom'] }}</span>
+                         
+                         </div>
+                       </div> 
+                    <!-- /.direct-chat-infos -->
+                    
+                    <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text ml-1">
+                         {{ message['message'] }}
+                           
+                           <span class="direct-chat-timestamp float-right">{{ message['date'] }}</span>
+                    <!-- /.direct-chat-text -->
+                         </div>
+                      {%endif%}
+                  
+                  <!-- /.direct-chat-msg -->
+                  {% endfor %}
+                  <!-- Message to the right -->
+                  
+                  <!-- /.direct-chat-msg -->
+               
+                <!--/.direct-chat-messages-->
+
+               
+                <!-- /.direct-chat-pane -->
+                
+  <!-- jQuery -->
+ 
+</html>

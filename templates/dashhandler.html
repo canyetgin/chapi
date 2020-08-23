@@ -1,0 +1,32 @@
+<table class="table table-hover table-striped">
+    <tbody>
+    <tr>
+  
+    {% for list in listed %}
+      
+      
+      
+     
+      <td class="mailbox-name" ><a >{{list['mesfrom']}}</a></td>
+     
+      {% if list['unreaded']>0 %}
+      <td class="mailbox-subject"><span class="badge bg-danger">{{list['unreaded']}}</span></td> 
+      {%else%}
+      <td class="mailbox-subject"></td> 
+      {% endif %}  
+      
+     
+      
+      <td class="mailbox-date"><button onclick=getmessages("{{list['mesfrom']}}") class="btn btn-primary">Send</button></td>
+    </tr>
+    
+    {% endfor %}
+    
+    
+    
+   
+     
+    
+    </tbody>
+  </table>
+  
