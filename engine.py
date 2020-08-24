@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect,jsonify,session
 import pymysql.cursors
+import datetime 
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'chapilovesocy'
 
@@ -37,7 +39,21 @@ def chat(serverid):
  conn.execute('SELECT * FROM users WHERE email = %s ', (serverid))
  user = conn.fetchone()
  if user:  
+  noww=datetime.datetime.now() 
+  db = pymysql.connect(host='localhost',
+                             user='root',
+                             password='',
+                             db='capi',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
 
+  conn = db.cursor()
+  conn.execute('SELECT * FROM users WHERE email = %s ', (serverid))
+  user = conn.fetchone()
+  calc=noww- user['lastactivity']
+  isactive=0
+  if calc.seconds<6:
+   isactive=1 
   session['serverid']=serverid    
   if request.method =='POST':
      if  'clientmail' in session: 
@@ -60,13 +76,13 @@ def chat(serverid):
      else:
        session['remoteip']=request.remote_addr
        session['clientmail']=request.form.get('email')
-       return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary",display="",serverid=serverid)
+       return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary",display="",serverid=serverid,isactive=isactive)
 
   else:
     if  'clientmail' in session: 
-      return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary",display="",serverid=serverid)
+      return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary",display="",serverid=serverid,isactive=isactive)
     else:
-      return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary direct-chat-contacts-open",display="display:none;",serverid=serverid) 
+      return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary direct-chat-contacts-open",display="display:none;",serverid=serverid,isactive=isactive) 
  else:
   return 'yanlış'
 @app.route("/dashhandler-chat",methods=['GET','POST'])
@@ -111,6 +127,19 @@ def dashandler_chat():
 
 @app.route("/dashhandler",methods=['GET','POST'])
 def dashandler():
+  if request.method =='POST' : 
+   db = pymysql.connect(host='localhost',
+                             user='root',
+                             password='',
+                             db='capi',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)  
+   conn = db.cursor()  
+   conn.execute("UPDATE users SET lastactivity =%s  WHERE email=%s", (datetime.datetime.now(),session['serverid_dash']))
+   conn.connection.commit()
+   return ('', 204)
+    
+  else:
     db = pymysql.connect(host='localhost',
                              user='root',
                              password='',

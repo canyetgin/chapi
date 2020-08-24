@@ -263,6 +263,23 @@
 };
 </script>
 <script>
+setInterval(function(event){
+      
+      $.ajax({
+ 
+    
+  url:"/dashhandler",
+  method:"POST",
+  cache: false,
+  success:function(data){
+  $('#chatzone').html(data);
+  
+ }
+ });
+ 
+ }, 4000);
+  </script>
+<script>
 
 setInterval(function(event){
       
