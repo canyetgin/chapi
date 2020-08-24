@@ -64,6 +64,27 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
+        <div class="info-box mb-3  col-3">
+          <span class="info-box-icon bg-primary elevation-1"><i class="far fa-comment"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Direct Messages</span>
+            <span class="info-box-number">{{summes}}</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <div class="col-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Today's Visitors</span>
+              <span class="info-box-number">{{visitors}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
         <div class="col-3">
           <div class="info-box mb-3">
             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
@@ -76,11 +97,22 @@
           </div>
           <!-- /.info-box -->
         </div>
-        <div class="col-9"></div>
+        <div class="col-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Total Messages</span>
+              <span class="info-box-number">{{summes}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
         <div class="col-md-3">
          
 
-          <div class="card">
+          <div class="card card-primary card-outline">
             <div class="card-header">
               <h3 class="card-title">Chat Messages</h3>
 

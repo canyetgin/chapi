@@ -196,7 +196,7 @@ def dashboard():
     
    conn = db.cursor()
       
-      
+   
    conn.execute("INSERT INTO message (mesfrom,message,mesto) VALUES (%s, %s,%s)", (session['serverid_dash'], message, session['clientmaildash']))
    conn.connection.commit()
  else:
@@ -214,9 +214,10 @@ def dashboard():
      conn = db.cursor()
      
      summes=conn.execute("SELECT * FROM message WHERE mesfrom=%s OR mesto=%s", (session['serverid_dash'],session['serverid_dash']))
+     visitors=conn.execute("select mesfrom  from message  where mesto=%s and date between %s and %s  group by mesfrom",(session['serverid_dash'],datetime.date.today(),datetime.date.today() + datetime.timedelta(days=1)))
      
      
-     return render_template("dashboard.html",summes=summes)
+     return render_template("dashboard.html",summes=summes,visitors=visitors)
     else:
         return redirect("/auth/login") 
 
