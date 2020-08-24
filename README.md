@@ -16,7 +16,7 @@
   - Statistics 
   - Embed code generator
   - Modernized IU
-  - Moderation integration
+  - Moderation integration.
 
 # Tech
 
