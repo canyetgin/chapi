@@ -201,8 +201,22 @@ def dashboard():
    conn.connection.commit()
  else:
     if 'serverid_dash' in session:
+     db = pymysql.connect(host='localhost',
+                             user='root',
+                             password='',
+                             db='capi',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)  
+
+    
      
-     return render_template("dashboard.html")
+    
+     conn = db.cursor()
+     
+     summes=conn.execute("SELECT * FROM message WHERE mesfrom=%s OR mesto=%s", (session['serverid_dash'],session['serverid_dash']))
+     
+     
+     return render_template("dashboard.html",summes=summes)
     else:
         return redirect("/auth/login") 
 
