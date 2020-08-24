@@ -26,9 +26,9 @@
             <div class="{{tag}}">
               <div class="card-header">
                 {%if isactive %}
-                 <h3 class="card-title">CHAPI-ONLINE</h3>
+                 <h3 class="card-title">{{session['serverid']}} <span class="badge badge-success">Online</span></h3>
                 {%else%}
-                <h3 class="card-title">CHAPI-OFFLINE</h3>
+                <h3 class="card-title">{{session['serverid']}} <span class="badge badge-danger">Offline</span></h3>
                 {%endif%}
                 <div class="card-tools">
                   <span data-toggle="tooltip" title="3 New Messages" class="badge bg-primary">{{count}}</span>
