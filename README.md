@@ -13,7 +13,9 @@
 
 # New Features!
 
-  - Rooms 
+  - Statistics 
+  - Embed code generator
+  - Modernized IU
   - Moderation integration
 
 # Tech
