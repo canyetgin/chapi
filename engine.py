@@ -54,11 +54,11 @@ def chat(serverid):
        conn = db.cursor()
       
       
-       conn.execute("INSERT INTO message (mesfrom,message,mesto) VALUES (%s, %s,%s)", (mesfrom, message, serverid))
+       conn.execute("INSERT INTO message (mesfrom,message,mesto,ip) VALUES (%s, %s,%s,%s)", (mesfrom, message, serverid,session['remoteip']))
        conn.connection.commit()
       
      else:
-      
+       session['remoteip']=request.remote_addr
        session['clientmail']=request.form.get('email')
        return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary",display="",serverid=serverid)
 
@@ -68,15 +68,7 @@ def chat(serverid):
     else:
       return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary direct-chat-contacts-open",display="display:none;",serverid=serverid) 
  else:
-<<<<<<< HEAD
   return 'yanlış'
-=======
-   if  'clientmail' in session: 
-     return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary",display="",serverid=serverid)
-   else:
-     return render_template("dialog.html" ,tag="card card-prirary cardutline direct-chat direct-chat-primary direct-chat-contacts-open",display="display:none;",serverid=serverid) 
-
->>>>>>> 8436d61da7dd1a591087ee6296ead6c661428d7e
 @app.route("/dashhandler-chat",methods=['GET','POST'])
 def dashandler_chat():
  
@@ -180,6 +172,7 @@ def dashboard():
    conn.connection.commit()
  else:
     if 'serverid_dash' in session:
+     
      return render_template("dashboard.html")
     else:
         return redirect("/auth/login") 
